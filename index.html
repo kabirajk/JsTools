@@ -1,0 +1,57 @@
+<head>
+  <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
+
+</head>
+<body>
+  <div class="main-div">
+    <section class="vid-player">
+      <video id="my-video" class="video-js vjs-theme-fantasy " controls width="720px">
+        <source id="video-src" src="https://rs15.seedr.cc/ff_get/1317880631/www.1TamilMV.media%20-%20Ponniyin%20Selvan%201%20(2022)%20Hindi%20HDRip%20-%20720p%20-%20x264%20-%20(DD5.1%20-%20640Kbps%20%20AAC)%20-%201.4GB -%20ESub .mkv?st=s0BnYzKp0-M7y_gLC8G-kw&e=1669636848" type="video/mp4">
+        <!-- <source src="//vjs.zencdn.net/v/oceans.webm" type="video/webm"> -->
+      </video>
+    </section>
+    <div class="textfield">
+      <input type="text" name="" id="urlInput">
+      <button id="loadurl" onclick="changeUrl()">Load</button>
+    </div>
+    <ul style="display: none;">
+      <!-- <li> instructions</li>
+      <li> instructions</li>
+      <li> instructions</li>
+      <li> instructions</li>
+      <li> instructions</li> -->
+    </ul>
+  </div>
+   
+  <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/form-data@4.0.0/index.d.ts"></script>
+  <script src="jquery.min.js"></script>
+  <script>
+    var videoObj = videojs('my-video');
+    var inputFiled = $("#urlInput");
+    var submit = $("#loadurl")
+    function changeUrl(){
+      let inputUrl=inputFiled.val();
+      videoObj.pause();
+      removeList=['https:','drive.google.com',"d",'','file','edit','view']
+      if(inputUrl.indexOf('drive.google.com')){
+        let tempurl=inputUrl.split(/\//)
+        file_id=undefined;
+        $.each(tempurl,function(index,value){
+            if(removeList.includes(value) == false){
+              if(value.length>30){
+                file_id=value;
+              }
+            }
+        });
+        inputUrl=`https://drive.google.com/uc?id=${file_id}&export=download&confirm=t`
+      }
+      videoObj.src({'src':inputUrl,'type': 'video/mp4'})
+      // $("#video-src").attr('src',inputUrl);
+      videoObj.load();
+      videoObj.play();
+    }
+  </script>
+</body>
