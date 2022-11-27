@@ -36,7 +36,7 @@
       let inputUrl=inputFiled.val();
       videoObj.pause();
       removeList=['https:','drive.google.com',"d",'','file','edit','view']
-      if(inputUrl.indexOf('drive.google.com')){
+      if(inputUrl.indexOf('drive.google.com')>=0){
         let tempurl=inputUrl.split(/\//)
         file_id=undefined;
         $.each(tempurl,function(index,value){
